@@ -1,0 +1,8 @@
+pytorch
+transformers[torch]
+evaluate
+sacrebleu
+sentencepiece
+protobuf
+huggingface_accelerate>=0.21.0
+datasets>=2.14.6
