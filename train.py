@@ -35,7 +35,6 @@ class ClassifierTrainer():
 
     def model_init():
         
-        
         model = AutoModelForSequenceClassification.from_pretrained(
         "distilbert-base-uncased", num_labels=3, id2label=self.id2label, label2id=self.label2id)
         
@@ -59,8 +58,7 @@ class ClassifierTrainer():
             evaluation_strategy="steps",
             eval_steps=500,
             load_best_model_at_end=True,
-            push_to_hub=False,
-        )
+            push_to_hub=False)
 
         trainer = Trainer(
             model_init=model_init,
@@ -69,15 +67,13 @@ class ClassifierTrainer():
             eval_dataset=self.tokenized_fin_news["test"],
             tokenizer=self.tokenizer,
             data_collator=self.data_collator,
-            compute_metrics=self.compute_metrics,
-        )
+            compute_metrics=self.compute_metrics)
 
         trainer.hyperparameter_search(
             direction="maximize",
             backend="ray",
             n_trials=6,
-            hp_space=self.hp_space_ray
-        )
+            hp_space=self.hp_space_ray)
     
     def train_the_classifier(self):
         """Обучение модели"""
