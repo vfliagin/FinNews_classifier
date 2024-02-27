@@ -33,7 +33,7 @@ class ClassifierTrainer():
         
         return self.accuracy.compute(predictions=predictions, references=labels, average="weighted")
 
-    def model_init():
+    def model_init(self):
         
         model = AutoModelForSequenceClassification.from_pretrained(
         "distilbert-base-uncased", num_labels=3, id2label=self.id2label, label2id=self.label2id)
@@ -61,7 +61,7 @@ class ClassifierTrainer():
             push_to_hub=False)
 
         trainer = Trainer(
-            model_init=model_init,
+            model_init=self.model_init,
             args=training_args,
             train_dataset=self.tokenized_fin_news["train"],
             eval_dataset=self.tokenized_fin_news["test"],
