@@ -1,3 +1,4 @@
+scikit-learn
 pytorch
 transformers[torch]
 evaluate
